@@ -49,7 +49,7 @@ namespace L4751
 
         public override string ToString()
         {
-            return $"{Number,4} {DigitSum,4} {DigitProduct,4} {MultiplicativePersistance,4}";
+            return $"  {Number,4} {DigitSum,4} {DigitProduct,4} {MultiplicativePersistance,4}";
         }
 
         private List<int> GetDigits(int num)
