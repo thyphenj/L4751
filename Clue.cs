@@ -42,6 +42,19 @@ public class Clue
         }
         return retval;
     }
+
+    public List<int> AllNumbers()
+    {
+        List<int> retval = new List<int>();
+
+        foreach (var prop in PossAnswers)
+        {
+            retval.Add(prop.Number);
+        }
+
+        return retval;
+    }
+
     public override string ToString()
     {
         var s = new StringBuilder(Rubric + "\n");

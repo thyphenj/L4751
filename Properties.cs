@@ -5,8 +5,8 @@ namespace L4751
     {
         public int Number { get; set; }
         public int[] Digits { get; set; }
-        public int DigitSum { get; set; }
-        public int DigitProduct { get; set; }
+        public int DS { get; set; }
+        public int DP { get; set; }
         public int MultiplicativePersistance { get; set; }
 
         public Properties(int num)
@@ -20,15 +20,15 @@ namespace L4751
                 Digits[i] = int.Parse(numstr[i].ToString());
             }
 
-            DigitSum = 0;
-            DigitProduct = 1;
+            DS = 0;
+            DP = 1;
             foreach (var digit in GetDigits(Number))
             {
-                DigitSum += digit;
-                DigitProduct *= digit;
+                DS += digit;
+                DP *= digit;
             }
 
-            int mp = DigitProduct;
+            int mp = DP;
             MultiplicativePersistance = 1;
             while (mp > 9)
             {
@@ -42,6 +42,18 @@ namespace L4751
             }
         }
 
+        public int NumberOfFactors()
+        {
+            int retval = 2;
+
+            for ( int i = 2; i <= Number / 2; i++)
+            {
+                if (Number % i == 0)
+                    retval++;
+            }
+            return retval;
+        }
+
         public int DigitAtPosition(int pos)
         {
             return Digits[pos];
@@ -49,7 +61,7 @@ namespace L4751
 
         public override string ToString()
         {
-            return $"  {Number,4} {DigitSum,4} {DigitProduct,4} {MultiplicativePersistance,4}";
+            return $"  {Number,4} {DS,4} {DP,4} {MultiplicativePersistance,4}";
         }
 
         private List<int> GetDigits(int num)
