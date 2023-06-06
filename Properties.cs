@@ -7,7 +7,7 @@ namespace L4751
         public int[] Digits { get; set; }
         public int DS { get; set; }
         public int DP { get; set; }
-        public int MultiplicativePersistance { get; set; }
+        public int MP { get; set; }
 
         public Properties(int num)
         {
@@ -29,10 +29,10 @@ namespace L4751
             }
 
             int mp = DP;
-            MultiplicativePersistance = 1;
+            MP = 1;
             while (mp > 9)
             {
-                MultiplicativePersistance++;
+                MP++;
                 int product = 1;
                 foreach (var digit in GetDigits(mp))
                 {
@@ -59,11 +59,6 @@ namespace L4751
             return Digits[pos];
         }
 
-        public override string ToString()
-        {
-            return $"  {Number,4} {DS,4} {DP,4} {MultiplicativePersistance,4}";
-        }
-
         private List<int> GetDigits(int num)
         {
             var retval = new List<int>();
@@ -73,6 +68,11 @@ namespace L4751
                 num /= 10;
             }
             return retval;
+        }
+
+        public override string ToString()
+        {
+            return $"[{Number,4} {DS,2} {DP,3} {MP,1}]";
         }
     }
 }

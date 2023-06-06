@@ -6,12 +6,25 @@ using System.Text;
 
 public class Clue
 {
+    public string Number { get; set; }
     public string Rubric { get; set; }
+    public int Length { get; set; }
     public List<Properties> PossAnswers { get; set; }
 
-    public Clue(string str)
+    public Clue(Clue clue)
     {
+        Number = clue.Number;
+        Rubric = clue.Rubric;
+        Length = clue.Length;
+
+        PossAnswers = new List<Properties>();
+    }
+
+    public Clue(string num, string str, int len)
+    {
+        Number = num;
         Rubric = str;
+        Length = len;
         PossAnswers = new List<Properties>();
     }
 
@@ -57,9 +70,20 @@ public class Clue
 
     public override string ToString()
     {
-        var s = new StringBuilder(Rubric + "\n");
-        foreach (var p in PossAnswers)
-            s.Append(p + "\n");
+        StringBuilder[] lines = { new StringBuilder(), new StringBuilder(), new StringBuilder(), new StringBuilder(), new StringBuilder(), new StringBuilder() };
+        for (int i = 0; i < PossAnswers.Count; i++)
+        {
+            var p = PossAnswers[i];
+
+            lines[i % 6].Append("  " + p.ToString());
+        }
+
+        var s = new StringBuilder($"{Number} ({PossAnswers.Count}) : {Rubric}\n\n");
+        foreach (var str in lines)
+        {
+            if (str.ToString() != "")
+                s.AppendLine(str.ToString());
+        }
         return s.ToString();
     }
 }
